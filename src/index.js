@@ -80,7 +80,7 @@ export function getResourcesHandler(i18next, options) {
     i18next.services.backendConnector.load(languages, namespaces, function() {
       languages.forEach(lng => {
         namespaces.forEach(ns => {
-          utils.setPath(resources, [lng, ns], i18n.getResourceBundle(lng, ns));
+          utils.setPath(resources, [lng, ns], i18next.getResourceBundle(lng, ns));
         });
       });
 
