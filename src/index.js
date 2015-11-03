@@ -13,7 +13,7 @@ export function handle(i18next, options) {
     if (req.lng && i18next.services.languageDetector) lng = i18next.services.languageDetector.detect();
 
     // set locale
-    req.locale = req.lng = req.language = lng || i18next.options.fallbackLng;
+    req.locale = req.lng = req.language = lng || i18next.options.fallbackLng[0];
 
     // assert t function returns always translation
     // in given lng inside this request
