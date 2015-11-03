@@ -1,0 +1,10 @@
+test/
+src/
+coverage/
+.babelrc
+.editorconfig
+.eslintignore
+.eslintrc
+.gitignore
+gulpfile.js
+karma.conf.js
