@@ -17,7 +17,11 @@ export function handle(i18next, options) {
 
     // assert t function returns always translation
     // in given lng inside this request
-    let t = i18next.getFixedT(lng);
+    let t = function(key, options) {
+      options = options || {};
+      options.lng = options.lng || req.lng;
+      return i18next.t(key, options);
+    };
 
     let exists = function(key, options) {
       options = options || {};
