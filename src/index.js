@@ -69,6 +69,8 @@ export function getResourcesHandler(i18next, options) {
 
     let languages = req.query[options.lngParam || 'lng'] || [];
     let namespaces = req.query[options.nsParam || 'ns'] || [];
+    languages = languages.split[' '];
+    namespaces = namespaces.split[' '];
 
      // extend ns
     namespaces.forEach(ns => {
