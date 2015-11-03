@@ -45,6 +45,7 @@ export function handle(i18next, options) {
     }
 
     if (i18next.services.languageDetector) i18next.services.languageDetector.cacheUserLanguage(lng);
+    next();
   };
 };
 
@@ -53,7 +54,7 @@ export function getResourcesHandler(i18next, options) {
   let maxAge = options.maxAge || 60 * 60 * 24 * 30;
 
   return function(req, res) {
-    if (i18next.services.backendConnector) return res.status(404).send('i18next-express-middleware:: no backend configured');
+    if (!i18next.services.backendConnector) return res.status(404).send('i18next-express-middleware:: no backend configured');
 
     let resources = {};
 
@@ -93,7 +94,7 @@ export function missingKeyHandler(i18next, options) {
     let lng = req.params[options.lngParam || 'lng'];
     let ns = req.params[options.nsParam || 'ns'];
 
-    if (i18next.services.backendConnector) return res.status(404).send('i18next-express-middleware:: no backend configured');
+    if (!i18next.services.backendConnector) return res.status(404).send('i18next-express-middleware:: no backend configured');
 
     for (var m in req.body) {
       i18next.services.backendConnector.saveMissing([lng], ns, m, req.body[m]);
