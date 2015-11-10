@@ -1,8 +1,9 @@
 import * as utils from './utils';
+import LanguageDetector from './LanguageDetector';
 
-export function handle(i18next, options) {
-  options = options || {};
+export var LanguageDetector = LanguageDetector; 
 
+export function handle(i18next, options = {}) {
   return function(req, res, next) {
     let ignores = options.ignoreRoutes || [];
     ignores.forEach(ignore => {
@@ -10,7 +11,7 @@ export function handle(i18next, options) {
     });
 
     let lng = req.lng;
-    if (req.lng && i18next.services.languageDetector) lng = i18next.services.languageDetector.detect();
+    if (req.lng && i18next.services.languageDetector) lng = i18next.services.languageDetector.detect(req, res);
 
     // set locale
     req.locale = req.lng = req.language = lng || i18next.options.fallbackLng[0];
@@ -48,7 +49,7 @@ export function handle(i18next, options) {
       res.locals.language = lng;
     }
 
-    if (i18next.services.languageDetector) i18next.services.languageDetector.cacheUserLanguage(lng);
+    if (i18next.services.languageDetector) i18next.services.languageDetector.cacheUserLanguage(req, res, lng);
     next();
   };
 };

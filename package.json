@@ -12,6 +12,7 @@
   "homepage": "https://github.com/i18next/i18next-express-middleware",
   "bugs": "https://github.com/i18next/i18next-express-middleware/issues",
   "dependencies": {
+    "cookies": "0.5.1",
     "json5": "0.4.0"
   },
   "devDependencies": {
