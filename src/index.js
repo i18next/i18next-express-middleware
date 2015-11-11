@@ -1,7 +1,7 @@
 import * as utils from './utils';
-import LanguageDetector from './LanguageDetector';
+import LD from './LanguageDetector';
 
-export var LanguageDetector = LanguageDetector; 
+export var LanguageDetector = LD; 
 
 export function handle(i18next, options = {}) {
   return function(req, res, next) {

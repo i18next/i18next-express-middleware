@@ -6,7 +6,7 @@ import headerLookup from './languageLookups/header';
 
 function getDefaults() {
   return {
-    order: ['path', 'querystring', 'cookie', 'header'],
+    order: [/*'path',*/ 'querystring', 'cookie', 'header'],
     lookupQuerystring: 'lng',
     lookupCookie: 'i18next',
     lookupFromPathIndex: 0,
