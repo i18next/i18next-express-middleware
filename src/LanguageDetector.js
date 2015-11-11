@@ -21,16 +21,17 @@ function getDefaults() {
 }
 
 class LanguageDetector {
-  constructor(services, options = {}) {
+  constructor(services, options = {}, allOptions = {}) {
     this.type = 'languageDetector';
     this.detectors = {};
 
-    this.init(services, options);
+    this.init(services, options, allOptions);
   }
 
-  init(services, options = {}) {
+  init(services, options = {}, allOptions = {}) {
     this.services = services;
     this.options = utils.defaults(options, this.options || {}, getDefaults());
+    this.allOptions = allOptions;
 
     this.addDetector(cookieLookup);
     this.addDetector(querystringLookup);
@@ -63,7 +64,7 @@ class LanguageDetector {
       if (this.services.languageUtils.isWhitelisted(cleanedLng)) found = cleanedLng;
     });
 
-    return found || this.options.fallbackLng[0];
+    return found || (this.allOptions.fallbackLng && this.allOptions.fallbackLng[0]);
   }
 
   cacheUserLanguage(req, res, lng, caches) {

@@ -52,7 +52,7 @@ export function handle(i18next, options = {}) {
     if (i18next.services.languageDetector) i18next.services.languageDetector.cacheUserLanguage(req, res, lng);
 
     // load resources
-    i18next.services.backendConnector.load([req.lng], i18next.options.ns, function() {
+    i18next.loadLanguages(req.lng, i18next.options.ns, function() {
       next();
     });
   };
