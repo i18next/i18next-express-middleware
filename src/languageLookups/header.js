@@ -38,7 +38,7 @@ export default {
         });
 
         for (i = 0; i < lngs.length; i++) {
-          locales.push(lngs[i]);
+          locales.push(lngs[i].lng);
         }
 
         if (locales.length) found = locales;
