@@ -3,12 +3,14 @@ import cookieLookup from './languageLookups/cookie';
 import querystringLookup from './languageLookups/querystring';
 import pathLookup from './languageLookups/path';
 import headerLookup from './languageLookups/header';
+import sessionLookup from './languageLookups/session';
 
 function getDefaults() {
   return {
     order: [/*'path',*/ 'querystring', 'cookie', 'header'],
     lookupQuerystring: 'lng',
     lookupCookie: 'i18next',
+    lookupSession: 'lng',
     lookupFromPathIndex: 0,
 
     // cache user language
@@ -34,6 +36,7 @@ class LanguageDetector {
     this.addDetector(querystringLookup);
     this.addDetector(pathLookup);
     this.addDetector(headerLookup);
+    this.addDetector(sessionLookup);
   }
 
   addDetector(detector) {
@@ -41,6 +44,7 @@ class LanguageDetector {
   }
 
   detect(req, res, detectionOrder) {
+    if (arguments.length < 2) return;
     if (!detectionOrder) detectionOrder = this.options.order;
 
     let detected = [];
@@ -63,6 +67,7 @@ class LanguageDetector {
   }
 
   cacheUserLanguage(req, res, lng, caches) {
+    if (arguments.length < 3) return;
     if (!caches) caches = this.options.caches;
     if (!caches) return;
     caches.forEach(cacheName => {
