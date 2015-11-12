@@ -14,7 +14,8 @@ export function handle(i18next, options = {}) {
     if (!req.lng && i18next.services.languageDetector) lng = i18next.services.languageDetector.detect(req, res);
 
     // set locale
-    req.locale = req.lng = req.language = lng || i18next.options.fallbackLng[0];
+    req.language = req.locale = req.lng = lng || i18next.options.fallbackLng[0];
+    req.languages = i18next.services.languageUtils.toResolveHierarchy(lng)
 
     // assert t function returns always translation
     // in given lng inside this request
