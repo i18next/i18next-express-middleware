@@ -29,13 +29,13 @@ gulp.task('babel', function () {
 function inc(version) {
   if (!version) return;
 
-  var type;
+  var type, tag;
 
   if (version.indexOf('.') < 0) {
     if (version === 'major' || version === 'minor' || version === 'patch') {
       type = version;
     } else {
-      var tag = version;
+      tag = version;
 
       var parts = pkg.version.split('-');
       if (parts.length > 1) {
@@ -59,7 +59,7 @@ function inc(version) {
   }
 
   // get all the files to bump version in
-  return gulp.src(['./package.json'])
+  return gulp.src(['./package.json', './bower.json'])
     // bump the version number in those files
     .pipe(type ? bump({type: type}) : bump({version: version}))
     // save it back to filesystem
@@ -75,7 +75,7 @@ function inc(version) {
 
     // push tag
     .pipe(prompt.confirm({
-        message: 'Commit and Push tag ' + version + ' to github?',
+        message: 'Push tag ' + version + ' to github?',
         default: false
     }))
     .pipe(cb(function() {
@@ -90,7 +90,7 @@ function inc(version) {
         default: false
     }))
     .pipe(shell([
-      'npm publish'
+      'npm publish --tag ' + (tag ? tag : 'latest')
     ]));
 }
 

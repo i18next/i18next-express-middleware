@@ -7,7 +7,7 @@ import sessionLookup from './languageLookups/session';
 
 function getDefaults() {
   return {
-    order: [/*'path',*/ 'querystring', 'cookie', 'header'],
+    order: [/*'path', 'session' */ 'querystring', 'cookie', 'header'],
     lookupQuerystring: 'lng',
     lookupCookie: 'i18next',
     lookupSession: 'lng',
