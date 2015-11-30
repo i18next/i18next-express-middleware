@@ -8,10 +8,10 @@ export default {
 
     if (options.lookupCookie && typeof req !== 'undefined') {
       if (req.cookies) {
-        found = req.cookies[options.cookieName];
+        found = req.cookies[options.lookupCookie];
       } else {
         const cookies = new Cookies(req, res);
-        found = cookies.get(options.cookieName);
+        found = cookies.get(options.lookupCookie);
       }
     }
 
