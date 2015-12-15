@@ -102,7 +102,7 @@ var i18next = require('i18next');
 var middleware = require('i18next-express-middleware');
 
 i18next
-  .use(middleware.LngDetector)
+  .use(middleware.LanguageDetector)
   .init({
     detection: options
   });
@@ -112,7 +112,7 @@ on construction:
 
 ```js
 var middleware = require('i18next-express-middleware');
-var lngDetector = new middleware.LngDetector(null, options);
+var lngDetector = new middleware.LanguageDetector(null, options);
 ```
 
 via calling init:
@@ -120,7 +120,7 @@ via calling init:
 ```js
 var middleware = require('i18next-express-middleware');
 
-var lngDetector = new middleware.LngDetector();
+var lngDetector = new middleware.LanguageDetector();
 lngDetector.init(options);
 ```
 
@@ -153,7 +153,7 @@ module.exports {
 var i18next = require('i18next');
 var middleware = require('i18next-express-middleware');
 
-var lngDetector = new middleware.LngDetector();
+var lngDetector = new middleware.LanguageDetector();
 lngDetector.addDetector(myDetector);
 
 i18next
