@@ -48,6 +48,7 @@ export function handle(i18next, options = {}) {
       res.locals.exists = exists;
       res.locals.i18n = i18n;
       res.locals.language = lng;
+      res.locals.languageDir = i18next.dir(lng);
     }
 
     if (i18next.services.languageDetector) i18next.services.languageDetector.cacheUserLanguage(req, res, lng);
