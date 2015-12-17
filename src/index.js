@@ -15,12 +15,15 @@ export function handle(i18next, options = {}) {
 
     // set locale
     req.language = req.locale = req.lng = lng || i18next.options.fallbackLng[0];
-    req.languages = i18next.services.languageUtils.toResolveHierarchy(lng)
+    req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
 
     // assert t function returns always translation
     // in given lng inside this request
     let t = function(key, options) {
       options = options || {};
+      if (typeof options !== 'object' && i18next.options.overloadTranslationOptionHandler && typeof i18next.options.overloadTranslationOptionHandler === 'function') {
+        options = i18next.options.overloadTranslationOptionHandler(arguments);
+      }
       options.lng = options.lng || req.lng;
       return i18next.t(key, options);
     };
