@@ -48,23 +48,23 @@ class LanguageDetector {
     if (arguments.length < 2) return;
     if (!detectionOrder) detectionOrder = this.options.order;
 
-    let detected = [];
+    let found, foundDetector;
     detectionOrder.forEach(detectorName => {
+      if (found) return;
+
       if (this.detectors[detectorName]) {
-        let lookup = this.detectors[detectorName].lookup(req, res, this.options);
-        if (lookup && typeof lookup === 'string') lookup = [lookup];
-        if (lookup) detected = detected.concat(lookup);
+        let lng = this.detectors[detectorName].lookup(req, res, this.options);
+
+        if (lng && typeof lng === 'string') {
+          let cleanedLng = this.services.languageUtils.formatLanguageCode(lng);
+
+          if (this.services.languageUtils.isWhitelisted(cleanedLng)) [found, foundDetector] = [cleanedLng, detectorName];
+        }
       }
     });
 
-    let found;
-    detected.forEach(lng => {
-      if (found) return;
-      let cleanedLng = this.services.languageUtils.formatLanguageCode(lng);
-      if (this.services.languageUtils.isWhitelisted(cleanedLng)) found = cleanedLng;
-    });
-
-    return found || (this.allOptions.fallbackLng && this.allOptions.fallbackLng[0]);
+    if (found && foundDetector) return [found, foundDetector];
+    return [(this.allOptions.fallbackLng && this.allOptions.fallbackLng[0]), null];
   }
 
   cacheUserLanguage(req, res, lng, caches) {

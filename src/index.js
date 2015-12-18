@@ -11,11 +11,27 @@ export function handle(i18next, options = {}) {
     });
 
     let lng = req.lng;
-    if (!req.lng && i18next.services.languageDetector) lng = i18next.services.languageDetector.detect(req, res);
+    let detector;
+    if (!req.lng && i18next.services.languageDetector) [lng, detector] = i18next.services.languageDetector.detect(req, res);
 
     // set locale
     req.language = req.locale = req.lng = lng || i18next.options.fallbackLng[0];
     req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
+
+    if(detector === 'path' && options.removeLngFromUrl) {
+      let first = '';
+      let pos = i18next.services.languageDetector.options.lookupFromPathIndex;
+      if (req.url[0] === '/') {
+        pos++;
+        first = '/';
+      }
+      let parts = req.url.split('/');
+      parts.splice(pos,1);
+      req.url = parts.join('/');
+      if (req.url[0] !== '/') {
+        req.url = first + req.url;
+      }
+    }
 
     // assert t function returns always translation
     // in given lng inside this request
@@ -84,7 +100,7 @@ export function getResourcesHandler(i18next, options) {
     let languages = req.query[options.lngParam || 'lng'].split(' ') || [];
     let namespaces = req.query[options.nsParam || 'ns'].split(' ') || [];
 
-     // extend ns
+    // extend ns
     namespaces.forEach(ns => {
       if (i18next.options.ns && i18next.options.ns.indexOf(ns) < 0) i18next.options.ns.push(ns);
     });
