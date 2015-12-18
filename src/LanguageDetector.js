@@ -50,16 +50,13 @@ class LanguageDetector {
 
     let found, foundDetector;
     detectionOrder.forEach(detectorName => {
-      if (found) return;
+      if (found || !this.detectors[detectorName]) return;
 
-      if (this.detectors[detectorName]) {
-        let lng = this.detectors[detectorName].lookup(req, res, this.options);
+      let lng = this.detectors[detectorName].lookup(req, res, this.options);
+      if (lng && typeof lng === 'string') {
+        let cleanedLng = this.services.languageUtils.formatLanguageCode(lng);
 
-        if (lng && typeof lng === 'string') {
-          let cleanedLng = this.services.languageUtils.formatLanguageCode(lng);
-
-          if (this.services.languageUtils.isWhitelisted(cleanedLng)) [found, foundDetector] = [cleanedLng, detectorName];
-        }
+        if (this.services.languageUtils.isWhitelisted(cleanedLng)) [found, foundDetector] = [cleanedLng, detectorName];
       }
     });
 
