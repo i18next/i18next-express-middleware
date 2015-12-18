@@ -48,7 +48,7 @@ class LanguageDetector {
     if (arguments.length < 2) return;
     if (!detectionOrder) detectionOrder = this.options.order;
 
-    let found, foundDetector;
+    let found;
     detectionOrder.forEach(detectorName => {
       if (found || !this.detectors[detectorName]) return;
 
@@ -56,12 +56,14 @@ class LanguageDetector {
       if (lng && typeof lng === 'string') {
         let cleanedLng = this.services.languageUtils.formatLanguageCode(lng);
 
-        if (this.services.languageUtils.isWhitelisted(cleanedLng)) [found, foundDetector] = [cleanedLng, detectorName];
+        if (this.services.languageUtils.isWhitelisted(cleanedLng)) {
+          found = cleanedLng;
+          req.i18nextLookupName = detectorName;
+        };
       }
     });
 
-    if (found && foundDetector) return [found, foundDetector];
-    return [(this.allOptions.fallbackLng && this.allOptions.fallbackLng[0]), null];
+    return found || (this.allOptions.fallbackLng && this.allOptions.fallbackLng[0]);
   }
 
   cacheUserLanguage(req, res, lng, caches) {

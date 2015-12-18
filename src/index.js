@@ -11,14 +11,13 @@ export function handle(i18next, options = {}) {
     });
 
     let lng = req.lng;
-    let detector;
-    if (!req.lng && i18next.services.languageDetector) [lng, detector] = i18next.services.languageDetector.detect(req, res);
+    if (!req.lng && i18next.services.languageDetector) lng = i18next.services.languageDetector.detect(req, res);
 
     // set locale
     req.language = req.locale = req.lng = lng || i18next.options.fallbackLng[0];
     req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
 
-    if(detector === 'path' && options.removeLngFromUrl) {
+    if(req.i18nextLookupName === 'path' && options.removeLngFromUrl) {
       let first = '';
       let pos = i18next.services.languageDetector.options.lookupFromPathIndex;
       if (req.url[0] === '/') {
