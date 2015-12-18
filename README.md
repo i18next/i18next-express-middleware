@@ -21,7 +21,10 @@ var express = require('express');
 i18next.init(i18nextOptions);
 
 var app = express();
-app.use(middleware.handle(i18next));
+app.use(middleware.handle(i18next, {
+  ignoreRoutes: ["/foo"],
+  removeLngFromUrl: false
+}));
 
 
 // in your request handler

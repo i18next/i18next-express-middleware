@@ -48,20 +48,19 @@ class LanguageDetector {
     if (arguments.length < 2) return;
     if (!detectionOrder) detectionOrder = this.options.order;
 
-    let detected = [];
-    detectionOrder.forEach(detectorName => {
-      if (this.detectors[detectorName]) {
-        let lookup = this.detectors[detectorName].lookup(req, res, this.options);
-        if (lookup && typeof lookup === 'string') lookup = [lookup];
-        if (lookup) detected = detected.concat(lookup);
-      }
-    });
-
     let found;
-    detected.forEach(lng => {
-      if (found) return;
-      let cleanedLng = this.services.languageUtils.formatLanguageCode(lng);
-      if (this.services.languageUtils.isWhitelisted(cleanedLng)) found = cleanedLng;
+    detectionOrder.forEach(detectorName => {
+      if (found || !this.detectors[detectorName]) return;
+
+      let lng = this.detectors[detectorName].lookup(req, res, this.options);
+      if (lng && typeof lng === 'string') {
+        let cleanedLng = this.services.languageUtils.formatLanguageCode(lng);
+
+        if (this.services.languageUtils.isWhitelisted(cleanedLng)) {
+          found = cleanedLng;
+          req.i18nextLookupName = detectorName;
+        };
+      }
     });
 
     return found || (this.allOptions.fallbackLng && this.allOptions.fallbackLng[0]);

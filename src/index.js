@@ -17,6 +17,10 @@ export function handle(i18next, options = {}) {
     req.language = req.locale = req.lng = lng || i18next.options.fallbackLng[0];
     req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
 
+    if(req.i18nextLookupName === 'path' && options.removeLngFromUrl) {
+      req.url = utils.removeLngFromUrl(req.url, i18next.services.languageDetector.options.lookupFromPathIndex);
+    }
+
     // assert t function returns always translation
     // in given lng inside this request
     let t = function(key, options) {
@@ -84,7 +88,7 @@ export function getResourcesHandler(i18next, options) {
     let languages = req.query[options.lngParam || 'lng'].split(' ') || [];
     let namespaces = req.query[options.nsParam || 'ns'].split(' ') || [];
 
-     // extend ns
+    // extend ns
     namespaces.forEach(ns => {
       if (i18next.options.ns && i18next.options.ns.indexOf(ns) < 0) i18next.options.ns.push(ns);
     });
