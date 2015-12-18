@@ -40,3 +40,21 @@ export function extend(obj) {
   });
   return obj;
 }
+
+export function removeLngFromUrl(url, lookupFromPathIndex) {
+  let first = '';
+  let pos = lookupFromPathIndex;
+
+  if (url[0] === '/') {
+    pos++;
+    first = '/';
+  }
+
+  // Build new url
+  let parts = url.split('/');
+  parts.splice(pos,1);
+  url = parts.join('/');
+  if (url[0] !== '/') url = first + url;
+
+  return url;
+}

@@ -18,18 +18,7 @@ export function handle(i18next, options = {}) {
     req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
 
     if(req.i18nextLookupName === 'path' && options.removeLngFromUrl) {
-      let first = '';
-      let pos = i18next.services.languageDetector.options.lookupFromPathIndex;
-      if (req.url[0] === '/') {
-        pos++;
-        first = '/';
-      }
-      let parts = req.url.split('/');
-      parts.splice(pos,1);
-      req.url = parts.join('/');
-      if (req.url[0] !== '/') {
-        req.url = first + req.url;
-      }
+      req.url = utils.removeLngFromUrl(req.url, i18next.services.languageDetector.options.lookupFromPathIndex);
     }
 
     // assert t function returns always translation
