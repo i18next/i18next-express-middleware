@@ -52,15 +52,19 @@ class LanguageDetector {
     detectionOrder.forEach(detectorName => {
       if (found || !this.detectors[detectorName]) return;
 
-      let lng = this.detectors[detectorName].lookup(req, res, this.options);
-      if (lng && typeof lng === 'string') {
+      let detections = this.detectors[detectorName].lookup(req, res, this.options);
+      if (typeof detection === 'string') detections = [detections];
+
+      detections.forEach(lng => {
+        if (found) return;
+
         let cleanedLng = this.services.languageUtils.formatLanguageCode(lng);
 
         if (this.services.languageUtils.isWhitelisted(cleanedLng)) {
           found = cleanedLng;
           req.i18nextLookupName = detectorName;
         };
-      }
+      });
     });
 
     return found || (this.allOptions.fallbackLng && this.allOptions.fallbackLng[0]);
