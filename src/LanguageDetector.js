@@ -53,7 +53,8 @@ class LanguageDetector {
       if (found || !this.detectors[detectorName]) return;
 
       let detections = this.detectors[detectorName].lookup(req, res, this.options);
-      if (typeof detection === 'string') detections = [detections];
+      if(!detections) return
+      if (typeof detections === 'string') detections = [detections];
 
       detections.forEach(lng => {
         if (found) return;
