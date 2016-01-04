@@ -18,7 +18,9 @@ var i18next = require('i18next');
 var middleware = require('i18next-express-middleware');
 var express = require('express');
 
-i18next.init(i18nextOptions);
+i18next
+  .use(middleware.LanguageDetector)
+  .init(i18nextOptions);
 
 var app = express();
 app.use(middleware.handle(i18next, {
