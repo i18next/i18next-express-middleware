@@ -87,6 +87,7 @@ As with all modules you can either pass the constructor function (class) to the 
   lookupQuerystring: 'lng',
   lookupCookie: 'i18next',
   lookupSession: 'lng',
+  lookupPath: 'lng',
   lookupFromPathIndex: 0,
 
   // cache user language
