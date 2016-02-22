@@ -41,6 +41,7 @@ export function handle(i18next, options = {}) {
     let i18n = {
       t: t,
       exists: exists,
+      dir: function(lng) { return i18next.dir(lng); },
       changeLanguage: function(lng) { req.lng = lng; },
       language: lng
     };
