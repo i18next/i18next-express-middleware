@@ -86,8 +86,8 @@ export function getResourcesHandler(i18next, options) {
       res.header('Cache-Control', 'no-cache');
     }
 
-    let languages = req.query[options.lngParam || 'lng'].split(' ') || [];
-    let namespaces = req.query[options.nsParam || 'ns'].split(' ') || [];
+    let languages = req.query[options.lngParam || 'lng'] ? req.query[options.lngParam || 'lng'].split(' ') : [];
+    let namespaces = req.query[options.nsParam || 'ns'] ? req.query[options.nsParam || 'ns'].split(' ') : [];
 
     // extend ns
     namespaces.forEach(ns => {
