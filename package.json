@@ -20,6 +20,7 @@
     "json5": "0.4.0"
   },
   "devDependencies": {
+    "babel-cli": "6.0.0",
     "babel-core": "6.4.5",
     "babel-eslint": "5.0.0-beta6",
     "babel-preset-es2015": "6.3.13",
@@ -30,7 +31,7 @@
     "sinon": "1.17.1"
   },
   "scripts": {
-    "transpile": "babel src --out-dir lib",
+    "transpile": "babel src -d lib",
     "build": "npm run transpile",
     "version": "npm run build",
     "postversion": "git push && git push --tags && rm -rf build/temp"
