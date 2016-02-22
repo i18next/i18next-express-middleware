@@ -16,8 +16,10 @@
     "json5": "0.4.0"
   },
   "devDependencies": {
-    "babel": "5.8.21",
-    "babel-eslint": "4.1.0",
+    "babel-core": "6.4.5",
+    "babel-eslint": "5.0.0-beta6",
+    "babel-preset-es2015": "6.3.13",
+    "babel-preset-stage-0": "6.3.13",
     "chai": "2.3.0",
     "eslint": "1.2.1",
     "gulp": "3.9.0",
@@ -36,7 +38,13 @@
     "yargs": "3.29.0"
   },
   "scripts": {
-    "test": "gulp test"
+    "transpile": "babel src --out-dir lib",
+    "build": "npm run transpile",
+    "prepublish": "npm run build",
+    "publish": "gulp publish",
+    "patch": "npm run publish -- -v patch",
+    "minor": "npm run publish -- -v minor",
+    "major": "npm run publish -- -v major"
   },
   "author": "Jan Mühlemann <jan.muehlemann@gmail.com> (https://github.com/jamuhl)",
   "license": "MIT"

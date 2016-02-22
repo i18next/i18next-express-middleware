@@ -1,5 +1,6 @@
 test/
 src/
+lib/
 coverage/
 .babelrc
 .editorconfig
