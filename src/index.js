@@ -42,7 +42,10 @@ export function handle(i18next, options = {}) {
       t: t,
       exists: exists,
       dir: function(lng) { return i18next.dir(lng); },
-      changeLanguage: function(lng) { req.lng = lng; },
+      changeLanguage: function(lng) {
+        req.language = req.locale = req.lng = lng;
+        req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
+      },
       language: lng
     };
 
