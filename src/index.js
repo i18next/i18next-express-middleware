@@ -5,10 +5,10 @@ export var LanguageDetector = LD;
 
 export function handle(i18next, options = {}) {
   return function(req, res, next) {
-    let ignores = options.ignoreRoutes || [];
-    ignores.forEach(ignore => {
-      if (req.path.indexOf(ignore) > -1) return next();
-    });
+    let ignores = options.ignoreRoutes instanceof Array&&options.ignoreRoutes || [];
+    for (var i=0;i< ignores.length;i++){
+      if (req.path.indexOf(ignores[i]) > -1) return next();
+    }
 
     let lng = req.lng;
     if (!req.lng && i18next.services.languageDetector) lng = i18next.services.languageDetector.detect(req, res);
