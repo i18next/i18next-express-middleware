@@ -53,6 +53,56 @@ app.post('/locales/add/:lng/:ns', middleware.missingKeyHandler(i18next));
 app.get('/locales/resources.json', middleware.getResourcesHandler(i18next));
 ```
 
+##add localized routes
+
+You can add your routes directly to the express app or to an express router
+
+```js
+var express = require('express'),
+    app = express(),
+    i18next = require('i18next'),
+    FilesystemBackend = require('i18next-node-fs-backend'),
+    sprintf = require('i18next-sprintf-postprocessor'),
+    i18nextMiddleware = require('i18next-express-middleware'),
+    port = 3000;
+
+i18next
+  .use(i18nextMiddleware.LanguageDetector)
+  .use(FilesystemBackend)
+  .use(sprintf)
+  .init( options, function(){
+    i18nextMiddleware.addRoute(i18next, '/:lng/key-to-translate', ['en', 'de', 'it'], app, 'get', function(req, res) {
+      //endpoint function
+    });
+  });
+app.use(i18nextMiddleware.handle(i18next));
+app.listen(port, function(){ console.log('Server listening on port', port) } );
+```
+
+```js
+var express = require('express'),
+    app = express(),
+    i18next = require('i18next'),
+    FilesystemBackend = require('i18next-node-fs-backend'),
+    sprintf = require('i18next-sprintf-postprocessor'),
+    i18nextMiddleware = require('i18next-express-middleware'),
+    router = require('express').Router(),
+    port = 3000;
+
+i18next
+  .use(i18nextMiddleware.LanguageDetector)
+  .use(FilesystemBackend)
+  .use(sprintf)
+  .init( options, function(){
+    i18nextMiddleware.addRoute(i18next, '/:lng/key-to-translate', ['en', 'de', 'it'], router, 'get', function(req, res) {
+      //endpoint function
+    });
+    app.use('/', router);
+  });
+app.use(i18nextMiddleware.handle(i18next));
+app.listen(port, function(){ console.log('Server listening on port', port) } );
+```
+
 ## language detection
 
 Detects user language from current request. Comes with support for:
