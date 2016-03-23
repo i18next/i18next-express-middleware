@@ -125,7 +125,7 @@ export function missingKeyHandler(i18next, options) {
   };
 };
 
-function addRoute(i18next, route, lngs, app, verb, fc) {
+export function addRoute(i18next, route, lngs, app, verb, fc) {
   if (typeof verb === 'function') {
     fc = verb;
     verb = 'get';
@@ -154,3 +154,10 @@ function addRoute(i18next, route, lngs, app, verb, fc) {
     app[verb || 'get'].apply(app, routes.concat(callbacks));
   }
 };
+
+export default {
+  handle,
+  getResourcesHandler,
+  missingKeyHandler,
+  addRoute
+}
