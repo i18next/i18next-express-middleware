@@ -38,16 +38,11 @@ export function handle(i18next, options = {}) {
       return i18next.exists(key, options);
     };
 
-    let i18n = {
-      t: t,
-      exists: exists,
-      dir: function(lng) { return i18next.dir(lng); },
-      changeLanguage: function(lng) {
+    let i18n = i18next.cloneInstance();
+    i18n.on('languageChanged', (lng) => { // Keep language in sync
         req.language = req.locale = req.lng = lng;
         req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
-      },
-      language: lng
-    };
+    });
 
     // assert for req
     req.i18n = i18n;
