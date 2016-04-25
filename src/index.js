@@ -21,23 +21,6 @@ export function handle(i18next, options = {}) {
       req.url = utils.removeLngFromUrl(req.url, i18next.services.languageDetector.options.lookupFromPathIndex);
     }
 
-    // assert t function returns always translation
-    // in given lng inside this request
-    let t = function(key, options) {
-      options = options || {};
-      if (typeof options !== 'object' && i18next.options.overloadTranslationOptionHandler && typeof i18next.options.overloadTranslationOptionHandler === 'function') {
-        options = i18next.options.overloadTranslationOptionHandler(arguments);
-      }
-      options.lng = options.lng || req.lng;
-      return i18next.t(key, options);
-    };
-
-    let exists = function(key, options) {
-      options = options || {};
-      options.lng = options.lng || req.lng;
-      return i18next.exists(key, options);
-    };
-
     let i18n = i18next.cloneInstance();
     i18n.on('languageChanged', (lng) => { // Keep language in sync
         req.language = req.locale = req.lng = lng;
@@ -46,7 +29,7 @@ export function handle(i18next, options = {}) {
 
     // assert for req
     req.i18n = i18n;
-    req.t = req.t || t;
+    req.t = i18n.t;
 
     // assert for res -> template
     if (res.locals) {
