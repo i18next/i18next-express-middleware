@@ -10,48 +10,28 @@ export function handle(i18next, options = {}) {
       if (req.path.indexOf(ignores[i]) > -1) return next();
     }
 
+    let i18n = i18next.cloneInstance();
+    i18n.on('languageChanged', (lng) => { // Keep language in sync
+        req.language = req.locale = req.lng = lng;
+        req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
+    });
+
     let lng = req.lng;
     if (!req.lng && i18next.services.languageDetector) lng = i18next.services.languageDetector.detect(req, res);
 
     // set locale
-    req.language = req.locale = req.lng = lng || i18next.options.fallbackLng[0];
-    req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
+    i18n.changeLanguage(lng || i18next.options.fallbackLng[0]);
 
     if(req.i18nextLookupName === 'path' && options.removeLngFromUrl) {
       req.url = utils.removeLngFromUrl(req.url, i18next.services.languageDetector.options.lookupFromPathIndex);
     }
 
-    // assert t function returns always translation
-    // in given lng inside this request
-    let t = function(key, options) {
-      options = options || {};
-      if (typeof options !== 'object' && i18next.options.overloadTranslationOptionHandler && typeof i18next.options.overloadTranslationOptionHandler === 'function') {
-        options = i18next.options.overloadTranslationOptionHandler(arguments);
-      }
-      options.lng = options.lng || req.lng;
-      return i18next.t(key, options);
-    };
-
-    let exists = function(key, options) {
-      options = options || {};
-      options.lng = options.lng || req.lng;
-      return i18next.exists(key, options);
-    };
-
-    let i18n = {
-      t: t,
-      exists: exists,
-      dir: function(lng) { return i18next.dir(lng); },
-      changeLanguage: function(lng) {
-        req.language = req.locale = req.lng = lng;
-        req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
-      },
-      language: lng
-    };
+    let t = i18n.t.bind(i18n);
+    let exists = i18n.exists.bind(i18n);
 
     // assert for req
     req.i18n = i18n;
-    req.t = req.t || t;
+    req.t = t;
 
     // assert for res -> template
     if (res.locals) {
