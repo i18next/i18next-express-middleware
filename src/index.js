@@ -26,9 +26,12 @@ export function handle(i18next, options = {}) {
       req.url = utils.removeLngFromUrl(req.url, i18next.services.languageDetector.options.lookupFromPathIndex);
     }
 
+    let t = i18n.t.bind(i18n);
+    let exists = i18n.exists.bind(i18n);
+
     // assert for req
     req.i18n = i18n;
-    req.t = i18n.t;
+    req.t = t;
 
     // assert for res -> template
     if (res.locals) {
