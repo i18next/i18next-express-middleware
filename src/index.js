@@ -10,22 +10,21 @@ export function handle(i18next, options = {}) {
       if (req.path.indexOf(ignores[i]) > -1) return next();
     }
 
-    let lng = req.lng;
-    if (!req.lng && i18next.services.languageDetector) lng = i18next.services.languageDetector.detect(req, res);
-
-    // set locale
-    req.language = req.locale = req.lng = lng || i18next.options.fallbackLng[0];
-    req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
-
-    if(req.i18nextLookupName === 'path' && options.removeLngFromUrl) {
-      req.url = utils.removeLngFromUrl(req.url, i18next.services.languageDetector.options.lookupFromPathIndex);
-    }
-
     let i18n = i18next.cloneInstance();
     i18n.on('languageChanged', (lng) => { // Keep language in sync
         req.language = req.locale = req.lng = lng;
         req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
     });
+
+    let lng = req.lng;
+    if (!req.lng && i18next.services.languageDetector) lng = i18next.services.languageDetector.detect(req, res);
+
+    // set locale
+    i18n.changeLanguage(lng || i18next.options.fallbackLng[0]);
+
+    if(req.i18nextLookupName === 'path' && options.removeLngFromUrl) {
+      req.url = utils.removeLngFromUrl(req.url, i18next.services.languageDetector.options.lookupFromPathIndex);
+    }
 
     // assert for req
     req.i18n = i18n;
