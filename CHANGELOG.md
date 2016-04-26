@@ -1,3 +1,6 @@
+### 1.0.1
+- fixes call to loadLanguages
+
 ### 1.0.0
 - use an i18next instance clone instead of a pseudo/mock object, keep clone lng and req.lng in sync
 

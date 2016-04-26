@@ -20,6 +20,10 @@ export function handle(i18next, options = {}) {
     if (!req.lng && i18next.services.languageDetector) lng = i18next.services.languageDetector.detect(req, res);
 
     // set locale
+    req.language = req.locale = req.lng = lng;
+    req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
+
+    // trigger sync to instance - might trigger async load!
     i18n.changeLanguage(lng || i18next.options.fallbackLng[0]);
 
     if(req.i18nextLookupName === 'path' && options.removeLngFromUrl) {
