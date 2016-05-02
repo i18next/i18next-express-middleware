@@ -27,7 +27,7 @@
     "chai": "2.3.0",
     "eslint": "2.7.0",
     "mocha": "2.2.5",
-    "sinon": "1.17.1"
+    "sinon": "1.17.4"
   },
   "scripts": {
     "transpile": "babel src -d lib",
