@@ -49,6 +49,7 @@ export function handle(i18next, options = {}) {
     if (i18next.services.languageDetector) i18next.services.languageDetector.cacheUserLanguage(req, res, lng);
 
     // load resources
+    if (!req.lng) return next();
     i18next.loadLanguages(req.lng, function() {
       next();
     });

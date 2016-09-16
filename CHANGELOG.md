@@ -1,3 +1,6 @@
+### 1.0.2
+- call next without loading languages if there is no lng
+
 ### 1.0.1
 - fixes call to loadLanguages
 
