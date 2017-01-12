@@ -39,7 +39,7 @@ app.get('myRoute', function(req, res) {
   var translation = req.t('myKey');
 });
 
-// in your views, eg. in jade
+// in your views, eg. in pug (ex. jade)
 div=t('myKey')
 ```
 
