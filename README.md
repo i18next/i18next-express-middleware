@@ -20,7 +20,10 @@ var express = require('express');
 
 i18next
   .use(middleware.LanguageDetector)
-  .init(i18nextOptions);
+  .init({ 
+    preload: ['en', 'de', 'it'], 
+    ...otherOptions 
+   });
 
 var app = express();
 app.use(middleware.handle(i18next, {
@@ -68,7 +71,7 @@ var express = require('express'),
 i18next
   .use(i18nextMiddleware.LanguageDetector)
   .use(FilesystemBackend)
-  .init( options, function() {
+  .init({ preload: ['en', 'de', 'it'], ...otherOptions }, function() {
     i18nextMiddleware.addRoute(i18next, '/:lng/key-to-translate', ['en', 'de', 'it'], app, 'get', function(req, res) {
       //endpoint function
     });
@@ -91,7 +94,7 @@ var express = require('express'),
 i18next
   .use(i18nextMiddleware.LanguageDetector)
   .use(FilesystemBackend)
-  .init( options, function() {
+  .init({ preload: ['en', 'de', 'it'], ...otherOptions }, function() {
     i18nextMiddleware.addRoute(i18next, '/:lng/key-to-translate', ['en', 'de', 'it'], router, 'get', function(req, res) {
       //endpoint function
     });
