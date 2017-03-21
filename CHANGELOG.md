@@ -1,3 +1,6 @@
+### 1.0.3
+- Fix path lookup logic where query was being included in path [PR125](https://github.com/i18next/i18next-express-middleware/pull/125)
+
 ### 1.0.2
 - call next without loading languages if there is no lng
 
