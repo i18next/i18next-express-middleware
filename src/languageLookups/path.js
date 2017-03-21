@@ -13,7 +13,8 @@ export default {
     }
 
     if (!found && options.lookupFromPathIndex !== undefined) {
-      let parts = req.originalUrl.split('/');
+      let path = req.originalUrl.split('?')[0];
+      let parts = path.split('/');
       if (parts[0] === '') { // Handle paths that start with a slash, i.e., '/foo' -> ['', 'foo']
         parts.shift();
       }
