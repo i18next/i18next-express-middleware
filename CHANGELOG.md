@@ -1,3 +1,6 @@
+### 1.0.4
+- fixes rare issue in race condition of init call in cloned instance
+
 ### 1.0.3
 - Fix path lookup logic where query was being included in path [PR125](https://github.com/i18next/i18next-express-middleware/pull/125)
 

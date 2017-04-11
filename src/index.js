@@ -10,7 +10,7 @@ export function handle(i18next, options = {}) {
       if (req.path.indexOf(ignores[i]) > -1) return next();
     }
 
-    let i18n = i18next.cloneInstance();
+    let i18n = i18next.cloneInstance({ initImmediate: false });
     i18n.on('languageChanged', (lng) => { // Keep language in sync
         req.language = req.locale = req.lng = lng;
         req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
