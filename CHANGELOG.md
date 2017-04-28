@@ -1,3 +1,6 @@
+### 1.0.5
+- fixes persisting lng on calling changeLanguage [#918](https://github.com/i18next/i18next/issues/918)
+
 ### 1.0.4
 - fixes rare issue in race condition of init call in cloned instance
 
