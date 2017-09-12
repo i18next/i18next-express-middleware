@@ -16,7 +16,7 @@
     "url": "git://github.com/i18next/i18next-express-middleware.git"
   },
   "dependencies": {
-    "cookies": "0.6.1"
+    "cookies": "0.7.1"
   },
   "devDependencies": {
     "babel-cli": "6.7.7",

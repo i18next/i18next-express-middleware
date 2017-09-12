@@ -1,3 +1,6 @@
+### 1.0.6
+- update cookie dependency adding overwrite flag  [#127](https://github.com/i18next/i18next-express-middleware/issues/127)
+
 ### 1.0.5
 - fixes persisting lng on calling changeLanguage [#918](https://github.com/i18next/i18next/issues/918)
 
