@@ -1,3 +1,6 @@
+### 1.0.7
+- Fix path detection can crash app (if req.originalUrl is not set) [#137](https://github.com/i18next/i18next-express-middleware/pull/137)
+
 ### 1.0.6
 - update cookie dependency adding overwrite flag  [#127](https://github.com/i18next/i18next-express-middleware/issues/127)
 
