@@ -8,11 +8,11 @@ export default {
       return found;
     }
 
-    if (options.lookupPath !== undefined) {
+    if (options.lookupPath !== undefined && req.params) {
       found = req.params[options.lookupPath];
     }
 
-    if (!found && options.lookupFromPathIndex !== undefined) {
+    if (!found && typeof options.lookupFromPathIndex === 'number' && req.originalUrl) {
       let path = req.originalUrl.split('?')[0];
       let parts = path.split('/');
       if (parts[0] === '') { // Handle paths that start with a slash, i.e., '/foo' -> ['', 'foo']
