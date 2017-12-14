@@ -1,3 +1,6 @@
+### 1.0.8
+- Guard against non-string detections [PR141](https://github.com/i18next/i18next-express-middleware/pull/141)
+
 ### 1.0.7
 - Fix path detection can crash app (if req.originalUrl is not set) [#137](https://github.com/i18next/i18next-express-middleware/pull/137)
 
