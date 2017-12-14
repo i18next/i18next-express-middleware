@@ -1,4 +1,4 @@
-### 1.0.8
+### 1.0.9
 - Guard against non-string detections [PR141](https://github.com/i18next/i18next-express-middleware/pull/141)
 
 ### 1.0.7
