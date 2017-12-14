@@ -54,10 +54,10 @@ class LanguageDetector {
 
       let detections = this.detectors[detectorName].lookup(req, res, this.options);
       if(!detections) return;
-      if (typeof detections === 'string') detections = [detections];
+      if (!Array.isArray(detections)) detections = [detections];
 
       detections.forEach(lng => {
-        if (found) return;
+        if (found || typeof lng !== 'string') return;
 
         let cleanedLng = this.services.languageUtils.formatLanguageCode(lng);
 
