@@ -4,7 +4,7 @@ import LD from './LanguageDetector';
 export var LanguageDetector = LD;
 
 export function handle(i18next, options = {}) {
-  return function(req, res, next) {
+  return function i18nextMiddleware(req, res, next) {
     let ignores = options.ignoreRoutes instanceof Array&&options.ignoreRoutes || [];
     for (var i=0;i< ignores.length;i++){
       if (req.path.indexOf(ignores[i]) > -1) return next();
