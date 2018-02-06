@@ -1,3 +1,6 @@
+### 1.0.10
+- Use a named function for the middleware over an anonymous [PR144](https://github.com/i18next/i18next-express-middleware/pull/144)
+
 ### 1.0.9
 - Guard against non-string detections [PR141](https://github.com/i18next/i18next-express-middleware/pull/141)
 
