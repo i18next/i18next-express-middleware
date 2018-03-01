@@ -19,7 +19,7 @@ export default {
   },
 
   cacheUserLanguage(req, res, lng, options = {}) {
-    if (options.lookupCookie && req !== 'undefined') {
+    if (options.lookupCookie && req !== 'undefined' && !res._headerSent) {
       const cookies = new Cookies(req, res);
 
       let expirationDate = options.cookieExpirationDate;
