@@ -1,3 +1,6 @@
+### 1.0.11
+- check if the headers are sent before cookies set [PR145](https://github.com/i18next/i18next-express-middleware/pull/145)
+
 ### 1.0.10
 - Use a named function for the middleware over an anonymous [PR144](https://github.com/i18next/i18next-express-middleware/pull/144)
 
