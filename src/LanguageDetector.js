@@ -74,8 +74,7 @@ class LanguageDetector {
       if (typeof fallbacks === 'string') fallbacks = [fallbacks];
       if (Object.prototype.toString.apply(fallbacks) === '[object Array]') return fallbacks;
       
-      found = fallbacks[0];
-      found = found || fallbacks.default
+      found = fallbacks[0] || fallbacks.default;
     };
 
     return found;
