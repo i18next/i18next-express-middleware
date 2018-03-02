@@ -67,8 +67,18 @@ class LanguageDetector {
         };
       });
     });
+    
+    let fallbacks = this.allOptions.fallbackLng;
+    if (!fallbacks) return [];
+    if (typeof fallbacks === 'string') fallbacks = [fallbacks];
+    if (Object.prototype.toString.apply(fallbacks) === '[object Array]') return fallbacks;
+    
+    if (!found) {
+      found = fallbacks[0];
+      found = found || fallbacks.default
+    };
 
-    return found || (this.allOptions.fallbackLng && this.allOptions.fallbackLng[0]);
+    return found;
   }
 
   cacheUserLanguage(req, res, lng, caches) {
