@@ -68,12 +68,12 @@ class LanguageDetector {
       });
     });
     
-    let fallbacks = this.allOptions.fallbackLng;
-    if (!fallbacks) fallbacks = [];
-    if (typeof fallbacks === 'string') fallbacks = [fallbacks];
-    if (Object.prototype.toString.apply(fallbacks) === '[object Array]') return fallbacks;
-    
     if (!found) {
+      let fallbacks = this.allOptions.fallbackLng;
+      if (!fallbacks) fallbacks = [];
+      if (typeof fallbacks === 'string') fallbacks = [fallbacks];
+      if (Object.prototype.toString.apply(fallbacks) === '[object Array]') return fallbacks;
+      
       found = fallbacks[0];
       found = found || fallbacks.default
     };
