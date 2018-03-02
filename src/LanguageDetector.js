@@ -69,7 +69,7 @@ class LanguageDetector {
     });
     
     let fallbacks = this.allOptions.fallbackLng;
-    if (!fallbacks) return [];
+    if (!fallbacks) fallbacks = [];
     if (typeof fallbacks === 'string') fallbacks = [fallbacks];
     if (Object.prototype.toString.apply(fallbacks) === '[object Array]') return fallbacks;
     
