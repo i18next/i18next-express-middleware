@@ -1,3 +1,6 @@
+### 1.1.0
+- support returning fallback language when is set as Object [PR146](https://github.com/i18next/i18next-express-middleware/pull/146)
+
 ### 1.0.11
 - check if the headers are sent before cookies set [PR145](https://github.com/i18next/i18next-express-middleware/pull/145)
 
