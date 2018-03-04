@@ -67,14 +67,17 @@ class LanguageDetector {
         };
       });
     });
-    
+
     if (!found) {
       let fallbacks = this.allOptions.fallbackLng;
-      if (!fallbacks) fallbacks = [];
       if (typeof fallbacks === 'string') fallbacks = [fallbacks];
-      if (Object.prototype.toString.apply(fallbacks) === '[object Array]') return fallbacks;
-      
-      found = fallbacks[0] || fallbacks.default;
+      if (!fallbacks) fallbacks = [];
+
+      if (Object.prototype.toString.apply(fallbacks) === '[object Array]') {
+        found = fallbacks[0];
+      } else {
+        found = fallbacks[0] || fallbacks.default && fallbacks.default[0];
+      }
     };
 
     return found;

@@ -1,3 +1,6 @@
+### 1.1.1
+- fixes 1.1.0 detection should return a string not an array
+
 ### 1.1.0
 - support returning fallback language when is set as Object [PR146](https://github.com/i18next/i18next-express-middleware/pull/146)
 
