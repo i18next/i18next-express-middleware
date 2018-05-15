@@ -14,6 +14,10 @@ i18next
       loadPath: __dirname + '/locales/{{lng}}/{{ns}}.json',
       addPath: __dirname + '/locales/{{lng}}/{{ns}}.missing.json'
     },
+    detection: {
+      order: ['querystring', 'cookie'],
+      caches: ['cookie']
+    },
     fallbackLng: 'en',
     preload: ['en', 'de'],
     saveMissing: true
