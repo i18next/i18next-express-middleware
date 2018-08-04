@@ -147,5 +147,6 @@ export default {
   handle,
   getResourcesHandler,
   missingKeyHandler,
-  addRoute
+  addRoute,
+  LanguageDetector
 }
