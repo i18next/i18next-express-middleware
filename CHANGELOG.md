@@ -1,3 +1,7 @@
+### 1.3.1
+
+- check if cookie secure already set [PR155](https://github.com/i18next/i18next-express-middleware/pull/155)
+
 ### 1.3.0
 
 - allow setting of cookie secure [PR154](https://github.com/i18next/i18next-express-middleware/pull/154)
