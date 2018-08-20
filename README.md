@@ -14,46 +14,45 @@ $ npm install i18next-express-middleware
 ## wire up i18next to request object
 
 ```js
-var i18next = require('i18next');
-var middleware = require('i18next-express-middleware');
-var express = require('express');
+var i18next = require("i18next");
+var middleware = require("i18next-express-middleware");
+var express = require("express");
 
-i18next
-  .use(middleware.LanguageDetector)
-  .init({ 
-    preload: ['en', 'de', 'it'], 
-    ...otherOptions 
-   });
+i18next.use(middleware.LanguageDetector).init({
+  preload: ["en", "de", "it"],
+  ...otherOptions
+});
 
 var app = express();
-app.use(middleware.handle(i18next, {
-  ignoreRoutes: ["/foo"],
-  removeLngFromUrl: false
-}));
-
+app.use(
+  middleware.handle(i18next, {
+    ignoreRoutes: ["/foo"],
+    removeLngFromUrl: false
+  })
+);
 
 // in your request handler
-app.get('myRoute', function(req, res) {
+app.get("myRoute", function(req, res) {
   var lng = req.language; // 'de-CH'
   var lngs = req.languages; // ['de-CH', 'de', 'en']
-  req.i18n.changeLanguage('en'); // will not load that!!! assert it was preloaded
+  req.i18n.changeLanguage("en"); // will not load that!!! assert it was preloaded
 
-  var exists = req.i18n.exists('myKey');
-  var translation = req.t('myKey');
+  var exists = req.i18n.exists("myKey");
+  var translation = req.t("myKey");
 });
 
 // in your views, eg. in pug (ex. jade)
-div=t('myKey')
+div = t("myKey");
 ```
 
 ## add routes
 
 ```js
 // missing keys
-app.post('/locales/add/:lng/:ns', middleware.missingKeyHandler(i18next));
+app.post("/locales/add/:lng/:ns", middleware.missingKeyHandler(i18next));
 
 // multiload backend route
-app.get('/locales/resources.json', middleware.getResourcesHandler(i18next));
+app.get("/locales/resources.json", middleware.getResourcesHandler(i18next));
 ```
 
 ## add localized routes
@@ -61,47 +60,65 @@ app.get('/locales/resources.json', middleware.getResourcesHandler(i18next));
 You can add your routes directly to the express app
 
 ```js
-var express = require('express'),
-    app = express(),
-    i18next = require('i18next'),
-    FilesystemBackend = require('i18next-node-fs-backend'),
-    i18nextMiddleware = require('i18next-express-middleware'),
-    port = 3000;
+var express = require("express"),
+  app = express(),
+  i18next = require("i18next"),
+  FilesystemBackend = require("i18next-node-fs-backend"),
+  i18nextMiddleware = require("i18next-express-middleware"),
+  port = 3000;
 
 i18next
   .use(i18nextMiddleware.LanguageDetector)
   .use(FilesystemBackend)
-  .init({ preload: ['en', 'de', 'it'], ...otherOptions }, function() {
-    i18nextMiddleware.addRoute(i18next, '/:lng/key-to-translate', ['en', 'de', 'it'], app, 'get', function(req, res) {
-      //endpoint function
-    });
+  .init({ preload: ["en", "de", "it"], ...otherOptions }, function() {
+    i18nextMiddleware.addRoute(
+      i18next,
+      "/:lng/key-to-translate",
+      ["en", "de", "it"],
+      app,
+      "get",
+      function(req, res) {
+        //endpoint function
+      }
+    );
   });
 app.use(i18nextMiddleware.handle(i18next));
-app.listen(port, function() { console.log('Server listening on port', port) } );
+app.listen(port, function() {
+  console.log("Server listening on port", port);
+});
 ```
 
 or to an express router
 
 ```js
-var express = require('express'),
-    app = express(),
-    i18next = require('i18next'),
-    FilesystemBackend = require('i18next-node-fs-backend'),
-    i18nextMiddleware = require('i18next-express-middleware'),
-    router = require('express').Router(),
-    port = 3000;
+var express = require("express"),
+  app = express(),
+  i18next = require("i18next"),
+  FilesystemBackend = require("i18next-node-fs-backend"),
+  i18nextMiddleware = require("i18next-express-middleware"),
+  router = require("express").Router(),
+  port = 3000;
 
 i18next
   .use(i18nextMiddleware.LanguageDetector)
   .use(FilesystemBackend)
-  .init({ preload: ['en', 'de', 'it'], ...otherOptions }, function() {
-    i18nextMiddleware.addRoute(i18next, '/:lng/key-to-translate', ['en', 'de', 'it'], router, 'get', function(req, res) {
-      //endpoint function
-    });
-    app.use('/', router);
+  .init({ preload: ["en", "de", "it"], ...otherOptions }, function() {
+    i18nextMiddleware.addRoute(
+      i18next,
+      "/:lng/key-to-translate",
+      ["en", "de", "it"],
+      router,
+      "get",
+      function(req, res) {
+        //endpoint function
+      }
+    );
+    app.use("/", router);
   });
 app.use(i18nextMiddleware.handle(i18next));
-app.listen(port, function() { console.log('Server listening on port', port) } );
+app.listen(port, function() {
+  console.log("Server listening on port", port);
+});
 ```
 
 ## language detection
@@ -117,12 +134,10 @@ Detects user language from current request. Comes with support for:
 Wiring up:
 
 ```js
-var i18next = require('i18next');
-var middleware = require('i18next-express-middleware');
+var i18next = require("i18next");
+var middleware = require("i18next-express-middleware");
 
-i18next
-  .use(middleware.LanguageDetector)
-  .init(i18nextOptions);
+i18next.use(middleware.LanguageDetector).init(i18nextOptions);
 ```
 
 As with all modules you can either pass the constructor function (class) to the i18next.use or a concrete instance.
@@ -146,7 +161,8 @@ As with all modules you can either pass the constructor function (class) to the 
 
   // optional expire and domain for set cookie
   cookieExpirationDate: new Date(),
-  cookieDomain: 'myDomain'
+  cookieDomain: 'myDomain',
+  cookieSecure: true // if need secure cookie
 }
 ```
 
@@ -155,27 +171,25 @@ Options can be passed in:
 **preferred** - by setting options.detection in i18next.init:
 
 ```js
-var i18next = require('i18next');
-var middleware = require('i18next-express-middleware');
+var i18next = require("i18next");
+var middleware = require("i18next-express-middleware");
 
-i18next
-  .use(middleware.LanguageDetector)
-  .init({
-    detection: options
-  });
+i18next.use(middleware.LanguageDetector).init({
+  detection: options
+});
 ```
 
 on construction:
 
 ```js
-var middleware = require('i18next-express-middleware');
+var middleware = require("i18next-express-middleware");
 var lngDetector = new middleware.LanguageDetector(null, options);
 ```
 
 via calling init:
 
 ```js
-var middleware = require('i18next-express-middleware');
+var middleware = require("i18next-express-middleware");
 
 var lngDetector = new middleware.LanguageDetector();
 lngDetector.init(options);
@@ -203,24 +217,21 @@ module.exports {
 };
 ```
 
-
 ### adding it
 
 ```js
-var i18next = require('i18next');
-var middleware = require('i18next-express-middleware');
+var i18next = require("i18next");
+var middleware = require("i18next-express-middleware");
 
 var lngDetector = new middleware.LanguageDetector();
 lngDetector.addDetector(myDetector);
 
-i18next
-  .use(lngDetector)
-  .init({
-    detection: options
-  });
+i18next.use(lngDetector).init({
+  detection: options
+});
 ```
 
---------------
+---
 
 <h3 align="center">Gold Sponsors</h3>
 

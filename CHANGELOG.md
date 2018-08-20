@@ -1,3 +1,7 @@
+### 1.3.0
+
+- allow setting of cookie secure [PR154](https://github.com/i18next/i18next-express-middleware/pull/154)
+
 ### 1.2.1
 
 - add language detector to default export [PR153](https://github.com/i18next/i18next-express-middleware/pull/153)
