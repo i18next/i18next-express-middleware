@@ -28,7 +28,15 @@ export default {
         expirationDate.setFullYear(expirationDate.getFullYear() + 1);
       }
 
-      cookies.set(options.lookupCookie, lng, { expires: expirationDate, domain: options.cookieDomain, httpOnly : false, overwrite: true });
+      const cookieOptions = {
+        expires: expirationDate,
+        domain: options.cookieDomain,
+        secure: options.cookieSecure,
+        httpOnly: false,
+        overwrite: true
+      };
+
+      cookies.set(options.lookupCookie, lng, cookieOptions);
     }
   }
 };
