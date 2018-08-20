@@ -31,10 +31,13 @@ export default {
       const cookieOptions = {
         expires: expirationDate,
         domain: options.cookieDomain,
-        secure: options.cookieSecure,
         httpOnly: false,
         overwrite: true
       };
+
+      if (options.hasOwnProperty('cookieSecure')) {
+        cookieOptions.secure = options.cookieSecure;
+      }
 
       cookies.set(options.lookupCookie, lng, cookieOptions);
     }
