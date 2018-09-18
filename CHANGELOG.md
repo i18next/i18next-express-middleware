@@ -1,3 +1,7 @@
+### 1.4.0
+
+- Set Content-Language response header [PR159](https://github.com/i18next/i18next-express-middleware/pull/159)
+
 ### 1.3.2
 
 - npm ignore example folder
