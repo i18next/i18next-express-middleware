@@ -13,10 +13,18 @@ export function handle(i18next, options = {}) {
     let i18n = i18next.cloneInstance({ initImmediate: false });
     i18n.on('languageChanged', (lng) => { // Keep language in sync
         req.language = req.locale = req.lng = lng;
+        
+        if (res.locals) {
+          res.locals.language = lng;
+          res.locals.languageDir = i18next.dir(lng);
+        }
+      
         if (!res.headersSent) {
           res.set('Content-Language', lng);
         }
+      
         req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
+
         if (i18next.services.languageDetector) {
           i18next.services.languageDetector.cacheUserLanguage(req, res, lng);
         }
