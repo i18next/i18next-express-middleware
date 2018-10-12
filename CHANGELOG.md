@@ -1,3 +1,7 @@
+### 1.4.1
+
+- Update locals on languageChanged [PR163](https://github.com/i18next/i18next-express-middleware/pull/163)
+
 ### 1.4.0
 
 - Set Content-Language response header [PR159](https://github.com/i18next/i18next-express-middleware/pull/159)
