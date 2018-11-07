@@ -26,7 +26,7 @@ i18next.use(middleware.LanguageDetector).init({
 var app = express();
 app.use(
   middleware.handle(i18next, {
-    ignoreRoutes: ["/foo"],
+    ignoreRoutes: ["/foo"], // or function(req, res, options, i18next) { /* return true to ignore */ }
     removeLngFromUrl: false
   })
 );

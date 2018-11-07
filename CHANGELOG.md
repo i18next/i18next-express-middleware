@@ -1,3 +1,7 @@
+### 1.5.0
+
+- ignoreRoute can now be a function [#57](https://github.com/i18next/i18next-express-middleware/issues/57)
+
 ### 1.4.1
 
 - Update locals on languageChanged [PR163](https://github.com/i18next/i18next-express-middleware/pull/163)

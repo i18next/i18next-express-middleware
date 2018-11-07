@@ -5,24 +5,30 @@ export var LanguageDetector = LD;
 
 export function handle(i18next, options = {}) {
   return function i18nextMiddleware(req, res, next) {
-    let ignores = options.ignoreRoutes instanceof Array&&options.ignoreRoutes || [];
-    for (var i=0;i< ignores.length;i++){
-      if (req.path.indexOf(ignores[i]) > -1) return next();
+    if (typeof options.ignoreRoutes === 'function') {
+      if (options.ignoreRoutes(req, res, options, i18next)) {
+        return next();
+      }
+    } else {
+      let ignores = options.ignoreRoutes instanceof Array&&options.ignoreRoutes || [];
+      for (var i=0;i< ignores.length;i++){
+        if (req.path.indexOf(ignores[i]) > -1) return next();
+      }
     }
 
     let i18n = i18next.cloneInstance({ initImmediate: false });
     i18n.on('languageChanged', (lng) => { // Keep language in sync
         req.language = req.locale = req.lng = lng;
-        
+
         if (res.locals) {
           res.locals.language = lng;
           res.locals.languageDir = i18next.dir(lng);
         }
-      
+
         if (!res.headersSent) {
           res.set('Content-Language', lng);
         }
-      
+
         req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
 
         if (i18next.services.languageDetector) {
