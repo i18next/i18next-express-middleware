@@ -48,7 +48,7 @@ div = t("myKey");
 ## add routes
 
 ```js
-// missing keys
+// missing keys; make sure the body is parsed (i.e. with [body-parser](https://github.com/expressjs/body-parser#bodyparserjsonoptions))
 app.post("/locales/add/:lng/:ns", middleware.missingKeyHandler(i18next));
 
 // multiload backend route
