@@ -12,26 +12,18 @@ export default {
       let acceptLanguage = headers['accept-language'];
 
       if (acceptLanguage) {
-        let lngs = [], i;
-
-        // associate language tags by their 'q' value (between 1 and 0)
-        acceptLanguage.split(',').forEach(function(l) {
-          let parts = l.split(';'); // 'en-GB;q=0.8' -> ['en-GB', 'q=0.8']
-
-          // get the language tag qvalue: 'q=0.8' -> 0.8
-          let qvalue = 1; // default qvalue
-
-          for (i = 0; i < parts.length; i++) {
-            let part = parts[i].split('=');
-            if (part[0] === 'q' && !isNaN(part[1])) {
-              qvalue = Number(part[1]);
-              break;
+        let lngs = [], i, m;
+        const rgx = /(([a-z]{2})-?([A-Z]{2})?)\s*;?\s*(q=([0-9.]+))?/g;
+        
+        do {
+          m = rgx.exec(acceptLanguage);
+          if (m) {
+            const lng = m[1], weight = m[5] || '1', q = Number(weight);
+            if (lng && !isNaN(q)) {
+              lngs.push({lng, q});
             }
           }
-
-          // add the tag and primary subtag to the qvalue associations
-          lngs.push({lng: parts[0], q: qvalue});
-        });
+        } while (m);
 
         lngs.sort(function(a,b) {
           return b.q - a.q;
