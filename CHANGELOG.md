@@ -1,3 +1,7 @@
+### 1.6.0
+
+- Handle spaces in Accept-Language header [169](https://github.com/i18next/i18next-express-middleware/pull/169)
+
 ### 1.5.0
 
 - ignoreRoute can now be a function [#57](https://github.com/i18next/i18next-express-middleware/issues/57)

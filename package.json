@@ -1,6 +1,6 @@
 {
   "name": "i18next-express-middleware",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "express middleware for i18next",
   "main": "./lib/index.js",
   "keywords": [
