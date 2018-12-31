@@ -1,5 +1,5 @@
 declare module 'i18next-express-middleware' {
-  import express from 'express';
+  import * as express from 'express';
   import i18next from 'i18next';
 
   type I18next = i18next.i18n;
