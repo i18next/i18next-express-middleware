@@ -4,8 +4,6 @@ declare module 'i18next-express-middleware' {
 
   type I18next = i18next.i18n;
   type IgnoreRoutesFunction = (req: express.Request, res: express.Response, options: HandleOptions, i18next: I18next) => boolean;
-  type Lng = string;
-  type Lngs = string[];
   type App = express.Application | express.Router;
 
   interface HandleOptions {
@@ -26,8 +24,8 @@ declare module 'i18next-express-middleware' {
   export function handle(i18next: I18next, options?: HandleOptions): express.Handler;
   export function getResourcesHandler(i18next: I18next, options?: GetResourcesHandlerOptions): express.Handler;
   export function missingKeyHandler(i18next: I18next, options?: MissingKeyHandlerOptions): express.Handler;
-  export function addRoute(i18next: I18next, route: string, lngs: Lngs, app: App, verb: string, fc: express.RequestHandler): void;
-  export function addRoute(i18next: I18next, route: string, lngs: Lngs, app: App, fc: express.RequestHandler): void;
+  export function addRoute(i18next: I18next, route: string, lngs: string[], app: App, verb: string, fc: express.RequestHandler): void;
+  export function addRoute(i18next: I18next, route: string, lngs: string[], app: App, fc: express.RequestHandler): void;
 
   // LanguageDetector
   type LanguageDetectorServices = any;
