@@ -1,3 +1,7 @@
+### 1.7.0
+
+- add typings [170](https://github.com/i18next/i18next-express-middleware/pull/170)
+
 ### 1.6.0
 
 - Handle spaces in Accept-Language header [169](https://github.com/i18next/i18next-express-middleware/pull/169)
