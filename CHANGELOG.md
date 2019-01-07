@@ -1,3 +1,7 @@
+### 1.7.1
+
+- Insensitive checking language-locale [172](https://github.com/i18next/i18next-express-middleware/pull/172)
+
 ### 1.7.0
 
 - add typings [170](https://github.com/i18next/i18next-express-middleware/pull/170)
