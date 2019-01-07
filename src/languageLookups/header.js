@@ -13,7 +13,7 @@ export default {
 
       if (acceptLanguage) {
         let lngs = [], i, m;
-        const rgx = /(([a-z]{2})-?([A-Z]{2})?)\s*;?\s*(q=([0-9.]+))?/g;
+        const rgx = /(([a-z]{2})-?([A-Z]{2})?)\s*;?\s*(q=([0-9.]+))?/gi;
         
         do {
           m = rgx.exec(acceptLanguage);
