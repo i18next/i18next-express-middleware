@@ -1,3 +1,10 @@
+declare namespace Express {
+  export interface Request {
+      language: string;
+      languages: string[];
+  }
+}
+
 declare module 'i18next-express-middleware' {
   import * as express from 'express';
   import i18next from 'i18next';
