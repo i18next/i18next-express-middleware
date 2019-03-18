@@ -1,3 +1,7 @@
+### 1.7.2
+
+- typescript: Update typings to allow req.language and req.languages [176](https://github.com/i18next/i18next-express-middleware/pull/176)
+
 ### 1.7.1
 
 - Insensitive checking language-locale [172](https://github.com/i18next/i18next-express-middleware/pull/172)
