@@ -1,3 +1,7 @@
+### 1.7.3
+
+- typescript: Update typings to allow req.i18n and req.t without Typescript error. [177](https://github.com/i18next/i18next-express-middleware/pull/177)
+
 ### 1.7.2
 
 - typescript: Update typings to allow req.language and req.languages [176](https://github.com/i18next/i18next-express-middleware/pull/176)
