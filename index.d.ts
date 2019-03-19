@@ -1,14 +1,18 @@
-declare namespace Express {
-  export interface Request {
+import * as express from 'express';
+import i18next from 'i18next';
+
+declare global {
+  namespace Express {
+    interface Request {
       language: string;
       languages: string[];
+      i18n:i18next.i18n;
+      t:i18next.TFunction
+    }
   }
 }
 
 declare module 'i18next-express-middleware' {
-  import * as express from 'express';
-  import i18next from 'i18next';
-
   type I18next = i18next.i18n;
   type IgnoreRoutesFunction = (req: express.Request, res: express.Response, options: HandleOptions, i18next: I18next) => boolean;
   type App = express.Application | express.Router;
