@@ -8,8 +8,11 @@ export default {
       let headers = req.headers;
       if (!headers) return found;
 
+      let lookupExist = options.lookupHeader !== undefined; 
+      let lookupHeader = lookupExist ? headers[options.lookupHeader] : undefined;
+
       let locales = [];
-      let acceptLanguage = headers['accept-language'];
+      let acceptLanguage = lookupHeader || headers['accept-language'];
 
       if (acceptLanguage) {
         let lngs = [], i, m;
