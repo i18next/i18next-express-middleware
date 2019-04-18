@@ -1,3 +1,7 @@
+### 1.8.0
+
+- Add optional "lookupHeader" to replace default header [180](https://github.com/i18next/i18next-express-middleware/pull/180)
+
 ### 1.7.3
 
 - typescript: Update typings to allow req.i18n and req.t without Typescript error. [177](https://github.com/i18next/i18next-express-middleware/pull/177)
