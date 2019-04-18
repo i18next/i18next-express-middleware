@@ -9,7 +9,7 @@ export default {
       if (!headers) return found;
 
       let locales = [];
-      let acceptLanguage = headers['accept-language'];
+      let acceptLanguage = options.lookupHeader ? headers[options.lookupHeader] : headers['accept-language'];
 
       if (acceptLanguage) {
         let lngs = [], i, m;
