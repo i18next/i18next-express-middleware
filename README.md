@@ -152,6 +152,7 @@ As with all modules you can either pass the constructor function (class) to the 
   // keys or params to lookup language from
   lookupQuerystring: 'lng',
   lookupCookie: 'i18next',
+  lookupHeader: 'accept-language',
   lookupSession: 'lng',
   lookupPath: 'lng',
   lookupFromPathIndex: 0,
