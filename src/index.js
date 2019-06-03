@@ -29,28 +29,28 @@ export function handle(i18next, options = {}) {
           res.set('Content-Language', lng);
         }
 
-        req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
+        req.languages = i18next.default.services.languageUtils.toResolveHierarchy(lng);
 
-        if (i18next.services.languageDetector) {
-          i18next.services.languageDetector.cacheUserLanguage(req, res, lng);
+        if (i18next.default.services.languageDetector) {
+          i18next.default.services.languageDetector.cacheUserLanguage(req, res, lng);
         }
     });
 
     let lng = req.lng;
-    if (!req.lng && i18next.services.languageDetector) lng = i18next.services.languageDetector.detect(req, res);
+    if (!req.lng && i18next.default.services.languageDetector) lng = i18next.default.services.languageDetector.detect(req, res);
 
     // set locale
     req.language = req.locale = req.lng = lng;
     if (!res.headersSent) {
       res.set('Content-Language', lng);
     }
-    req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
+    req.languages = i18next.default.services.languageUtils.toResolveHierarchy(lng);
 
     // trigger sync to instance - might trigger async load!
     i18n.changeLanguage(lng || i18next.options.fallbackLng[0]);
 
     if(req.i18nextLookupName === 'path' && options.removeLngFromUrl) {
-      req.url = utils.removeLngFromUrl(req.url, i18next.services.languageDetector.options.lookupFromPathIndex);
+      req.url = utils.removeLngFromUrl(req.url, i18next.default.services.languageDetector.options.lookupFromPathIndex);
     }
 
     let t = i18n.t.bind(i18n);
@@ -69,7 +69,7 @@ export function handle(i18next, options = {}) {
       res.locals.languageDir = i18next.dir(lng);
     }
 
-    if (i18next.services.languageDetector) i18next.services.languageDetector.cacheUserLanguage(req, res, lng);
+    if (i18next.default.services.languageDetector) i18next.default.services.languageDetector.cacheUserLanguage(req, res, lng);
 
     // load resources
     if (!req.lng) return next();
@@ -84,7 +84,7 @@ export function getResourcesHandler(i18next, options) {
   let maxAge = options.maxAge || 60 * 60 * 24 * 30;
 
   return function(req, res) {
-    if (!i18next.services.backendConnector) return res.status(404).send('i18next-express-middleware:: no backend configured');
+    if (!i18next.default.services.backendConnector) return res.status(404).send('i18next-express-middleware:: no backend configured');
 
     let resources = {};
 
@@ -105,7 +105,7 @@ export function getResourcesHandler(i18next, options) {
       if (i18next.options.ns && i18next.options.ns.indexOf(ns) < 0) i18next.options.ns.push(ns);
     });
 
-    i18next.services.backendConnector.load(languages, namespaces, function() {
+    i18next.default.services.backendConnector.load(languages, namespaces, function() {
       languages.forEach(lng => {
         namespaces.forEach(ns => {
           utils.setPath(resources, [lng, ns], i18next.getResourceBundle(lng, ns));
@@ -124,10 +124,10 @@ export function missingKeyHandler(i18next, options) {
     let lng = req.params[options.lngParam || 'lng'];
     let ns = req.params[options.nsParam || 'ns'];
 
-    if (!i18next.services.backendConnector) return res.status(404).send('i18next-express-middleware:: no backend configured');
+    if (!i18next.default.services.backendConnector) return res.status(404).send('i18next-express-middleware:: no backend configured');
 
     for (var m in req.body) {
-      i18next.services.backendConnector.saveMissing([lng], ns, m, req.body[m]);
+      i18next.default.services.backendConnector.saveMissing([lng], ns, m, req.body[m]);
     }
     res.send('ok');
   };
