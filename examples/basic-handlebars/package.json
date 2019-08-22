@@ -10,7 +10,7 @@
     "express": "4.15.3",
     "express-handlebars": "3.0.0",
     "i18next": "8.3.0",
-    "i18next-express-middleware": "1.0.5",
+    "i18next-middleware": "file:../../",
     "i18next-node-fs-backend": "1.0.0"
   }
 }

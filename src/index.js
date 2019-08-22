@@ -26,7 +26,7 @@ export function handle(i18next, options = {}) {
         }
 
         if (!res.headersSent) {
-          res.set('Content-Language', lng);
+          res.setHeader('Content-Language', lng);
         }
 
         req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
@@ -42,7 +42,7 @@ export function handle(i18next, options = {}) {
     // set locale
     req.language = req.locale = req.lng = lng;
     if (!res.headersSent) {
-      res.set('Content-Language', lng);
+      res.setHeader('Content-Language', lng);
     }
     req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
 
@@ -112,7 +112,7 @@ export function getResourcesHandler(i18next, options) {
         });
       });
 
-      res.send(resources);
+      res.end(JSON.stringify(resources));
     });
   };
 };
@@ -129,7 +129,7 @@ export function missingKeyHandler(i18next, options) {
     for (var m in req.body) {
       i18next.services.backendConnector.saveMissing([lng], ns, m, req.body[m]);
     }
-    res.send('ok');
+    res.end(JSON.stringify('ok'));
   };
 };
 

@@ -1,9 +1,8 @@
-const express = require('express');
+const http = require('http');
 const i18next = require('i18next');
-const i18nextMiddleware = require('i18next-express-middleware');
+const i18nextMiddleware = require('i18next-middleware');
 const Backend = require('i18next-node-fs-backend');
 
-const app = express();
 const port = process.env.PORT || 8080;
 
 i18next
@@ -19,12 +18,12 @@ i18next
     saveMissing: true
   });
 
-app.use(i18nextMiddleware.handle(i18next));
-
-app.get('/', (req, res) => {
-  res.send(req.t('home.title'));
+const server = http.createServer((req, res) => {
+  i18nextMiddleware.handle(i18next)(req, res, () => {
+    res.end(req.t('home.title'));
+  })
 });
 
-app.listen(port, (err) => {
+server.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });

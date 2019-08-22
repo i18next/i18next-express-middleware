@@ -1,6 +1,6 @@
 const express = require('express');
 const i18next = require('i18next');
-const i18nextMiddleware = require('i18next-express-middleware');
+const i18nextMiddleware = require('i18next-middleware');
 const Backend = require('i18next-node-fs-backend');
 const expressHbs = require('express-handlebars');
 

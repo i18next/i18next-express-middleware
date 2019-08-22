@@ -1,26 +1,23 @@
 {
-  "name": "i18next-express-middleware",
+  "name": "i18next-middleware",
   "version": "1.8.2",
-  "description": "express middleware for i18next",
+  "description": "middleware for i18next",
   "main": "./lib/index.js",
   "types": "./index.d.ts",
   "keywords": [
     "i18next",
-    "i18next-express",
-    "express",
     "middleware"
   ],
-  "homepage": "https://github.com/i18next/i18next-express-middleware",
-  "bugs": "https://github.com/i18next/i18next-express-middleware/issues",
+  "homepage": "https://github.com/i18next/i18next-middleware",
+  "bugs": "https://github.com/i18next/i18next-middleware/issues",
   "repository": {
     "type": "git",
-    "url": "git://github.com/i18next/i18next-express-middleware.git"
+    "url": "git://github.com/i18next/i18next-middleware.git"
   },
   "dependencies": {
     "cookies": "0.7.1"
   },
   "devDependencies": {
-    "@types/express": "4.16.0",
     "babel-cli": "6.7.7",
     "babel-core": "6.7.7",
     "babel-eslint": "5.0.0",
