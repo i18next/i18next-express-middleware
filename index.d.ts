@@ -65,7 +65,9 @@ declare module 'i18next-express-middleware' {
     cacheUserLanguage?: (req: express.Request, res: express.Response, lng: string, options?: object) => void;
   }
 
-  export class LanguageDetector {
+  export class LanguageDetector implements i18next.Module {
+    type: "languageDetector";
+
     constructor(services: LanguageDetectorServices, options?: LanguageDetectorOptions, allOptions?: LanguageDetectorAllOptions);
     constructor(options?: LanguageDetectorOptions, allOptions?: LanguageDetectorAllOptions);
 
