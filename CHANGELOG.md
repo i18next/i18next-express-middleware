@@ -1,3 +1,7 @@
+### 1.8.1
+
+- typescript: update LanguageDetector (fix type error since i18next v17.0.8) [190](https://github.com/i18next/i18next-express-middleware/pull/190)
+
 ### 1.8.0
 
 - Add optional "lookupHeader" to replace default header [180](https://github.com/i18next/i18next-express-middleware/pull/180)
