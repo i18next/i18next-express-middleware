@@ -1,3 +1,7 @@
+### 1.8.2
+
+- typescript: fix: TypeScript i18next import [192](https://github.com/i18next/i18next-express-middleware/pull/192)
+
 ### 1.8.1
 
 - typescript: update LanguageDetector (fix type error since i18next v17.0.8) [190](https://github.com/i18next/i18next-express-middleware/pull/190)
