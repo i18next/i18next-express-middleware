@@ -201,7 +201,7 @@ lngDetector.init(options);
 ### interface
 
 ```js
-module.exports {
+module.exports = {
   name: 'myDetectorsName',
 
   lookup: function(req, res, options) {
