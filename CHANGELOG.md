@@ -1,3 +1,7 @@
+### 1.9.0
+
+- Remove Express alias of res.setHeader to support non-Express use with connect [199](https://github.com/i18next/i18next-express-middleware/pull/199)
+
 ### 1.8.2
 
 - typescript: fix: TypeScript i18next import [192](https://github.com/i18next/i18next-express-middleware/pull/192)
