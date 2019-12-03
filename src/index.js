@@ -26,7 +26,7 @@ export function handle(i18next, options = {}) {
         }
 
         if (!res.headersSent) {
-          res.set('Content-Language', lng);
+          res.setHeader('Content-Language', lng);
         }
 
         req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
@@ -42,7 +42,7 @@ export function handle(i18next, options = {}) {
     // set locale
     req.language = req.locale = req.lng = lng;
     if (!res.headersSent) {
-      res.set('Content-Language', lng);
+      res.setHeader('Content-Language', lng);
     }
     req.languages = i18next.services.languageUtils.toResolveHierarchy(lng);
 
