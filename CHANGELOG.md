@@ -1,3 +1,7 @@
+### 1.9.1
+
+- only setHeader if lng has value
+
 ### 1.9.0
 
 - Remove Express alias of res.setHeader to support non-Express use with connect [199](https://github.com/i18next/i18next-express-middleware/pull/199)

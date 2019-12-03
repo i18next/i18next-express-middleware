@@ -1,6 +1,6 @@
 {
   "name": "i18next-express-middleware",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "express middleware for i18next",
   "main": "./lib/index.js",
   "types": "./index.d.ts",
