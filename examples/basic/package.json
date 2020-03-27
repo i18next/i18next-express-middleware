@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "express": "4.17.1",
-    "i18next": "19.3.3",
+    "i18next": "19.3.4",
     "i18next-express-middleware": "1.9.1",
     "i18next-node-fs-backend": "2.1.3"
   }
