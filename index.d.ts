@@ -7,7 +7,7 @@ declare module 'i18next-express-middleware' {
   type IgnoreRoutesFunction = (req: express.Request, res: express.Response, options: HandleOptions, i18next: I18next) => boolean;
   type App = express.Application | express.Router;
 
-  type I18NextRequest = i18next.Request & {
+  type I18NextRequest = express.Request & {
     language: string;
     languages: string[];
     i18n:i18next.i18n;
