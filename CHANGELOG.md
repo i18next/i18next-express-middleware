@@ -1,3 +1,7 @@
+### 2.0.0
+
+- typescript: Update typings to export I18NextRequest instead of extending global express Request [211](https://github.com/i18next/i18next-express-middleware/pull/211)
+
 ### 1.9.1
 
 - only setHeader if lng has value
