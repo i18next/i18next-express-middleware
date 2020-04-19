@@ -10,6 +10,7 @@ i18next
   .use(Backend)
   .use(i18nextMiddleware.LanguageDetector)
   .init({
+    // debug: true,
     backend: {
       loadPath: __dirname + '/locales/{{lng}}/{{ns}}.json',
       addPath: __dirname + '/locales/{{lng}}/{{ns}}.missing.json'
