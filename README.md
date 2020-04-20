@@ -1,3 +1,9 @@
+# DEPRECATED
+
+Can be replaced with: [i18next-http-middleware](https://github.com/i18next/i18next-http-middleware)
+
+---
+
 # Introduction
 
 This is a middleware to use i18next in express.js.
